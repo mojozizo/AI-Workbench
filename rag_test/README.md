@@ -1,7 +1,4 @@
 # **RAG (Retrieval-Augmented Generation) Process Explained**  
-*Combining your understanding with clarifications and best practices.*
-
----
 
 ### **1. Document Loading**  
 - **Goal**: Load unstructured/semi-structured documents (PDFs, CSVs, text files) into usable text format.  
