@@ -1,1 +1,0 @@
-Some mini projects to explore new ai technologies and tools.
