@@ -1,0 +1,17 @@
+[project]
+name = "mcp"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.12",
+    "gunicorn>=23.0.0",
+    "pandas>=2.2.3",
+    "pydantic>=2.11.3",
+    "scikit-learn>=1.6.1",
+    "setuptools>=80.0.0",
+    "sklearn>=0.0.post12",
+    "uvicorn>=0.34.2",
+    "wheel>=0.45.1",
+]
