@@ -165,6 +165,7 @@ analysis_prompt = ChatPromptTemplate.from_messages([
     ("human", "Task: {task}\n\nInformation to analyze: {information}")
 ])
 
+# Another approach to doing things, with chain you can add more steps like parsing or validation 
 analysis_chain = analysis_prompt | llm
 
 def analysis_agent_executor(task: str, information: str):
