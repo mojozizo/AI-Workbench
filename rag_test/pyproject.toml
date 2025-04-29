@@ -1,0 +1,18 @@
+[project]
+name = "rag-test"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "chromadb>=0.5.1",  # Updated to be compatible with NumPy 2.0
+    "langchain>=0.3.24",
+    "langchain-community>=0.3.23",
+    "langchain-text-splitters>=0.3.8",
+    "langchain-core>=0.1.0",
+    "langchain-ollama>=0.1.0",
+    "langchain-chroma>=0.1.0",
+    "pandas>=2.2.3",
+    "pypdf>=5.4.0",
+    "numpy>=2.0.0",  # Explicitly require NumPy 2.0
+]
