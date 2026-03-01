@@ -73,10 +73,10 @@ When given a multi-step task you should:
 5. Return a clear, concise final answer.
 """
 
-# Groq model – llama-3.3-70b-versatile supports tool calling
-# Other good options: "llama-3.1-8b-instant", "mixtral-8x7b-32768"
+# llama-4-scout: 30K TPM (highest among tool-calling models on free tier)
+# runner-up: llama-3.3-70b-versatile (12K TPM)
 groq_model = ChatGroq(
-    model="llama-3.3-70b-versatile",
+    model="meta-llama/llama-4-scout-17b-16e-instruct",
     temperature=0,
 )
 
@@ -98,22 +98,32 @@ def stream_agent(user_message: str) -> str:
     print("="*60)
 
     final_content = ""
-    for chunk in agent.stream(
+    seen_ids: set = set()
+
+    # stream_mode="values" delivers the full state after each node,
+    # so messages is always a plain list (no Overwrite wrapper).
+    for state in agent.stream(
         {"messages": [{"role": "user", "content": user_message}]},
-        stream_mode="updates",
+        stream_mode="values",
     ):
-        for node, update in chunk.items():
-            msgs = update.get("messages", [])
-            for msg in msgs:
-                # Print tool calls / results as they arrive
-                if hasattr(msg, "tool_calls") and msg.tool_calls:
-                    for tc in msg.tool_calls:
-                        print(f"  [tool call] {tc['name']}({tc['args']})")
-                elif hasattr(msg, "name") and msg.name:
-                    print(f"  [tool result from {msg.name}]: {str(msg.content)[:120]}")
-                elif hasattr(msg, "content") and msg.content:
-                    final_content = msg.content
-    
+        msgs = state.get("messages", [])
+        if not msgs:
+            continue
+        msg = msgs[-1]  # only inspect the newest message each tick
+        msg_id = getattr(msg, "id", None)
+        if msg_id in seen_ids:
+            continue
+        if msg_id is not None:
+            seen_ids.add(msg_id)
+
+        if hasattr(msg, "tool_calls") and msg.tool_calls:
+            for tc in msg.tool_calls:
+                print(f"  [tool call] {tc['name']}({tc['args']})")
+        elif hasattr(msg, "name") and msg.name:
+            print(f"  [tool result from {msg.name}]: {str(msg.content)[:120]}")
+        elif hasattr(msg, "content") and msg.content:
+            final_content = msg.content
+
     print(f"\nASSISTANT: {final_content}")
     return final_content
 
