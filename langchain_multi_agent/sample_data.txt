@@ -1,0 +1,7 @@
+
+Artificial Intelligence (AI) is intelligence demonstrated by machines, as opposed to natural intelligence displayed by animals including humans.
+Leading AI textbooks define the field as the study of "intelligent agents": any system that perceives its environment and takes actions that maximize its chance of achieving its goals.
+Some popular AI methods include machine learning, deep learning, and reinforcement learning.
+
+Multi-agent systems consist of multiple interacting intelligent agents. These systems can be used to solve problems that are difficult or impossible for an individual agent.
+Agents can have different roles, capabilities, and knowledge, and they can work together to achieve a common goal.

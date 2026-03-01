@@ -175,4 +175,6 @@ cython_debug/
 
 chromadb
 
+uv.lock.DS_Store
+
 uv.lock
